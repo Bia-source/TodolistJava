@@ -20,6 +20,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(this.userRepository.findAll());
     }
 
+    @GetMapping("/username")
+    public ResponseEntity getUserByUsername(@RequestBody UserModel user){
+        return ResponseEntity.status(HttpStatus.OK).body(this.userRepository.findByUsername(user.getUsername()));
+    }
+
     @PostMapping("")
     public ResponseEntity create(@RequestBody UserModel userModel){
         var alreadyExist = this.userRepository.findByUsername(userModel.getUsername());
