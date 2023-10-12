@@ -1,5 +1,6 @@
 package com.beatriz.todolist.user.controller;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.beatriz.todolist.user.models.UserModel;
 import com.beatriz.todolist.user.repositories.UserModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,9 @@ public class UserController {
     @Autowired
     private UserModelRepository userRepository;
 
-    @GetMapping("")
-    public String getUser(){
-        return "todos";
+    @GetMapping("/all")
+    public ResponseEntity getUser(){
+        return ResponseEntity.status(HttpStatus.OK).body(this.userRepository.findAll());
     }
 
     @PostMapping("")
@@ -25,8 +26,9 @@ public class UserController {
         if(alreadyExist != null) {
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario já existe");
         }
+        var passwordHash = BCrypt.withDefaults().hashToString(12, userModel.getPassword().toCharArray());
+        userModel.setPassword(passwordHash);
         var newUser = this.userRepository.save(userModel);
-        System.out.println(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 }
