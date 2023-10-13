@@ -36,4 +36,12 @@ public class UserController {
         var newUser = this.userRepository.save(userModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
+
+    @DeleteMapping("/id")
+    public ResponseEntity deleteUserById(@RequestBody UserModel userModel){
+        this.userRepository.deleteById(userModel.getId());
+        return ResponseEntity.status(HttpStatus.OK).body("delete");
+    }
+
+
 }

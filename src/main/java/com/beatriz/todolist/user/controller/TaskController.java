@@ -38,4 +38,10 @@ public class TaskController {
         System.out.println(task);
         return  ResponseEntity.status(HttpStatus.OK).body(task);
     }
+
+    @DeleteMapping("/id")
+    public ResponseEntity deleteTaskById(@RequestBody TaskModel taskModel){
+        this.taskModelRepository.deleteById(taskModel.getId());
+        return ResponseEntity.status(HttpStatus.OK).body("delete");
+    }
 }
