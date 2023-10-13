@@ -2,12 +2,15 @@ package com.beatriz.todolist.src.controller;
 
 import com.beatriz.todolist.src.models.TaskModel;
 import com.beatriz.todolist.src.repositories.TaskModelRepository;
+import com.beatriz.todolist.src.shared.Priority;
+import com.beatriz.todolist.src.shared.Time;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RestController
@@ -25,6 +28,43 @@ public class TaskController {
 
         task.setIdUser((UUID) request.getAttribute("idUser"));
         return ResponseEntity.status(HttpStatus.CREATED).body(this.taskModelRepository.save(task));
+    }
+
+    @PutMapping("/time")
+    public ResponseEntity startTask(@RequestBody TaskModel task, @RequestParam("time") Time time){
+        if (time == Time.START) {
+            var getTask = this.taskModelRepository.findById(task.getId());
+            if (getTask.get().getStartAt() != null) {
+                return ResponseEntity.status(HttpStatus.OK).body("Uma data de inicio já foi definida");
+            }
+
+            getTask.get().setStartAt(LocalDateTime.now());
+            this.taskModelRepository.save(getTask.get());
+            return ResponseEntity.status(HttpStatus.OK).body(getTask);
+        }
+
+        if (time == Time.END){
+            var getTask = this.taskModelRepository.findById(task.getId());
+            if (getTask.get().getEndAt() != null) {
+                return ResponseEntity.status(HttpStatus.OK).body("Uma data de fim já foi definida");
+            }
+
+            getTask.get().setEndAt(LocalDateTime.now());
+            getTask.get().setStatus(true);
+
+            this.taskModelRepository.save(getTask.get());
+            return ResponseEntity.status(HttpStatus.OK).body(getTask);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Refaça a operação com valores validos (START, END)");
+    }
+
+    @PutMapping("/priority")
+    public ResponseEntity updatePriority(@RequestBody TaskModel task, @RequestParam("priority") Priority priorityParam){
+        var getTask = this.taskModelRepository.findById(task.getId());
+        getTask.get().setPriority(priorityParam);
+
+        this.taskModelRepository.save(getTask.get());
+        return ResponseEntity.status(HttpStatus.OK).body(getTask);
     }
 
     @GetMapping("/title")
