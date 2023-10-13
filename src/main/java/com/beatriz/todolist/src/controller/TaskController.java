@@ -1,11 +1,14 @@
-package com.beatriz.todolist.user.controller;
+package com.beatriz.todolist.src.controller;
 
-import com.beatriz.todolist.user.models.TaskModel;
-import com.beatriz.todolist.user.repositories.TaskModelRepository;
+import com.beatriz.todolist.src.models.TaskModel;
+import com.beatriz.todolist.src.repositories.TaskModelRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/task")
@@ -15,10 +18,12 @@ public class TaskController {
     private TaskModelRepository taskModelRepository;
 
     @PostMapping("")
-    public ResponseEntity createTask(@RequestBody TaskModel task){
-        if(task.getDescription() == null || task.getTitle() == null || task.getIdUser() == null){
+    public ResponseEntity createTask(@RequestBody TaskModel task, HttpServletRequest request){
+        if(task.getDescription() == null || task.getTitle() == null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possivel cadastrar, verifique as informações");
         }
+
+        task.setIdUser((UUID) request.getAttribute("idUser"));
         return ResponseEntity.status(HttpStatus.CREATED).body(this.taskModelRepository.save(task));
     }
 

@@ -1,8 +1,8 @@
-package com.beatriz.todolist.user.controller;
+package com.beatriz.todolist.src.controller;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import com.beatriz.todolist.user.models.UserModel;
-import com.beatriz.todolist.user.repositories.UserModelRepository;
+import com.beatriz.todolist.src.models.UserModel;
+import com.beatriz.todolist.src.repositories.UserModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

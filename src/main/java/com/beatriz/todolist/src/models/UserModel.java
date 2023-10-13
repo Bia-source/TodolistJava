@@ -1,4 +1,4 @@
-package com.beatriz.todolist.user.models;
+package com.beatriz.todolist.src.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,25 +11,19 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-@Entity(name = "tb_tasks")
-public class TaskModel {
+@Entity(name = "tb_users")
+public class UserModel {
 
     @Id
     @GeneratedValue(generator = "UUID")
     private UUID id;
+    private String name;
 
-    @Column(length = 50)
-    private String title;
-    private String description;
-    private UUID idUser;
-    private LocalDateTime startAt;
-    private LocalDateTime endAt;
-
-    @Column(name = "complete_status")
-    private Boolean status = false;
-    private String priority;
+    @Column(unique = true)
+    private String username;
+    private String password;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
-
 }
+
