@@ -2,7 +2,6 @@ package com.beatriz.todolist.src.controller;
 
 import com.beatriz.todolist.src.models.TaskModel;
 import com.beatriz.todolist.src.repositories.TaskModelRepository;
-import com.beatriz.todolist.src.shared.Priority;
 import com.beatriz.todolist.src.shared.Time;
 import com.beatriz.todolist.src.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,6 +33,15 @@ public class TaskController {
     @PutMapping("/{id}")
     public ResponseEntity updateTask(@RequestBody TaskModel taskModel, HttpServletRequest request, @PathVariable UUID id){
         var task = this.taskModelRepository.findById(id).orElse(null);
+        if(task == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tarefa não encontrada");
+        }
+
+        var idUser = request.getAttribute("idUser");
+        if(!task.getIdUser().equals(idUser)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Esse usuario não tem permissão para alterar tarefa de outro usuario");
+        }
+
         Utils.copyNonNullProperties(taskModel, task);
         return ResponseEntity.status(HttpStatus.OK).body(this.taskModelRepository.save(task));
     }
