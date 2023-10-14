@@ -1,13 +1,12 @@
-package com.beatriz.todolist.src.models;
+package com.beatriz.todolist.todo.models;
 
-import com.beatriz.todolist.src.shared.Priority;
+import com.beatriz.todolist.todo.shared.Priority;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

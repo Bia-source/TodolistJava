@@ -1,4 +1,4 @@
-package com.beatriz.todolist.src.errors;
+package com.beatriz.todolist.todo.errors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

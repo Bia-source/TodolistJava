@@ -1,6 +1,6 @@
-package com.beatriz.todolist.src.repositories;
+package com.beatriz.todolist.todo.repositories;
 
-import com.beatriz.todolist.src.models.TaskModel;
+import com.beatriz.todolist.todo.models.TaskModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

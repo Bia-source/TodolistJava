@@ -1,4 +1,4 @@
-package com.beatriz.todolist.src.models;
+package com.beatriz.todolist.todo.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
