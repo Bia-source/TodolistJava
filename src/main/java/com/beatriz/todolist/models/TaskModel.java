@@ -1,6 +1,6 @@
-package com.beatriz.todolist.todo.models;
+package com.beatriz.todolist.models;
 
-import com.beatriz.todolist.todo.shared.Priority;
+import com.beatriz.todolist.shared.Priority;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

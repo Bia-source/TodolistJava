@@ -1,9 +1,9 @@
-package com.beatriz.todolist.todo.controller;
+package com.beatriz.todolist.controller;
 
-import com.beatriz.todolist.todo.models.TaskModel;
-import com.beatriz.todolist.todo.repositories.TaskModelRepository;
-import com.beatriz.todolist.todo.shared.Time;
-import com.beatriz.todolist.todo.utils.Utils;
+import com.beatriz.todolist.models.TaskModel;
+import com.beatriz.todolist.repositories.TaskModelRepository;
+import com.beatriz.todolist.shared.Time;
+import com.beatriz.todolist.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

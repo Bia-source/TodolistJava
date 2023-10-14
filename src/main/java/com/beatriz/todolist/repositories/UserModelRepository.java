@@ -1,6 +1,6 @@
-package com.beatriz.todolist.todo.repositories;
+package com.beatriz.todolist.repositories;
 
-import com.beatriz.todolist.todo.models.UserModel;
+import com.beatriz.todolist.models.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

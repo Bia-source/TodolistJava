@@ -1,7 +1,7 @@
-package com.beatriz.todolist.todo.auth;
+package com.beatriz.todolist.auth;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import com.beatriz.todolist.todo.repositories.UserModelRepository;
+import com.beatriz.todolist.repositories.UserModelRepository;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,4 +1,4 @@
-package com.beatriz.todolist.todo.shared;
+package com.beatriz.todolist.shared;
 
 public enum Priority {
         LOW,

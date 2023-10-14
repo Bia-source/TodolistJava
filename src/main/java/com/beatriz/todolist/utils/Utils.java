@@ -1,4 +1,4 @@
-package com.beatriz.todolist.todo.utils;
+package com.beatriz.todolist.utils;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
