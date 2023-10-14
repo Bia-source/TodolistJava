@@ -3,10 +3,13 @@ package com.beatriz.todolist.src.controller;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.beatriz.todolist.src.models.UserModel;
 import com.beatriz.todolist.src.repositories.UserModelRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -38,8 +41,8 @@ public class UserController {
     }
 
     @DeleteMapping("/id")
-    public ResponseEntity deleteUserById(@RequestBody UserModel userModel){
-        this.userRepository.deleteById(userModel.getId());
+    public ResponseEntity deleteUserById(HttpServletRequest request){
+        this.userRepository.deleteById((UUID) request.getAttribute("idUser"));
         return ResponseEntity.status(HttpStatus.OK).body("delete");
     }
 

@@ -78,15 +78,14 @@ public class TaskController {
     }
 
     @GetMapping("/user")
-    public  ResponseEntity getTaskByIdUser(@RequestBody TaskModel taskModel){
-        var task = this.taskModelRepository.findTaskByIdUser(taskModel.getIdUser());
-        System.out.println(task);
+    public  ResponseEntity getTaskByIdUser(HttpServletRequest request){
+        var task = this.taskModelRepository.findTaskByIdUser((UUID) request.getAttribute("idUser"));
         return  ResponseEntity.status(HttpStatus.OK).body(task);
     }
 
     @DeleteMapping("/id")
-    public ResponseEntity deleteTaskById(@RequestBody TaskModel taskModel){
-        this.taskModelRepository.deleteById(taskModel.getId());
+    public ResponseEntity deleteTaskById(HttpServletRequest request){
+        this.taskModelRepository.deleteById((UUID) request.getAttribute("idUser"));
         return ResponseEntity.status(HttpStatus.OK).body("delete");
     }
 }
